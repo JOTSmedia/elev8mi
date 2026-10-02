@@ -1,0 +1,49 @@
+/* Final responsive and keyboard polish; scene rendering remains independent. */
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+  outline:2px solid #c2d9ff;
+  outline-offset:4px;
+}
+select.reading-style{min-height:48px}
+#readingGuide{
+  box-sizing:border-box;
+  max-height:calc(100dvh - 32px);
+  overflow:auto;
+  overscroll-behavior:contain;
+}
+#interpretDialog{overscroll-behavior:contain}
+#readingGuide p,#interpretDialog p,#interpretCards{overflow-wrap:anywhere}
+#closeReadingGuide,#closeInterpret{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  right:8px;
+  top:4px;
+  line-height:1;
+}
+#readingGuide h2,#interpretDialog h2{padding-right:32px}
+.menu-toggle{min-width:44px;min-height:44px;align-items:center;justify-content:center}
+.copy-row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+@media(max-width:720px){
+  nav{max-height:calc(100dvh - 88px);overflow-y:auto;overscroll-behavior:contain}
+  .header-content{grid-template-columns:auto minmax(0,1fr) auto}
+  .tuner{flex-shrink:0}
+  #readingGuide,#interpretDialog{padding:26px 20px}
+  .reading-help,.spread-row button,.draw-row button,.copy-row button{min-height:44px}
+}
+@media(max-width:420px){
+  .tuner .wave{display:none}
+  .tuner{gap:.3rem;padding-inline:.35rem}
+  .tuner .hz{font-size:.58rem;letter-spacing:.06em}
+  .nav-wordmark-image{width:138px}
+}
+@media(max-width:350px){
+  .nav-wordmark-image{width:112px}
+  .header-content{gap:.35rem;padding-inline:.5rem}
+}
+@media(max-height:500px){
+  #readingGuide,#interpretDialog{max-height:calc(100dvh - 20px);padding:22px 20px}
+}
+
+/* The decorative journey label yields space to content and motion controls. */
+@media (max-width: 420px) { .journey-caption { display: none; } }
