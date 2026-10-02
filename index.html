@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#05030c">
+<meta name="description" content="Allison — tarot readings for the in-between. In person, at a distance, and live. 528 Hz.">
+<title>ALLISON — Tarot Readings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Dancing+Script:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/orbit.webp" media="(min-width: 721px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/orbit-mobile.webp" media="(max-width: 720px)" fetchpriority="high">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="journey.css">
+<link rel="stylesheet" href="living-world.css">
+<noscript><style>body.locked { overflow: auto; } #loader { display: none; }</style></noscript>
+</head>
+<body class="locked">
+<div id="journey" aria-hidden="true">
+  <div class="journey-world" id="journeyWorld">
+    <picture class="journey-plate">
+      <source media="(max-width: 720px)" srcset="assets/orbit-mobile.webp">
+      <img src="assets/orbit.webp" alt="" width="941" height="1672" fetchpriority="high" decoding="async">
+    </picture>
+    <picture class="journey-plate">
+      <source media="(max-width: 720px)" srcset="assets/surface-mobile.webp">
+      <img src="assets/surface.webp" loading="lazy" alt="" width="941" height="1672" fetchpriority="low" decoding="async">
+    </picture>
+    <picture class="journey-plate">
+      <source media="(max-width: 720px)" srcset="assets/subterranean-mobile.webp">
+      <img src="assets/subterranean.webp" loading="lazy" alt="" width="940" height="1672" fetchpriority="low" decoding="async">
+    </picture>
+  </div>
+  <div class="day-sky" aria-hidden="true"></div><div class="night-sky" aria-hidden="true"></div>
+  <div class="world-weather" aria-hidden="true">
+    <div class="mist-stream mist-stream-one"></div>
+    <div class="mist-stream mist-stream-two"></div>
+    <div class="light-shaft"></div>
+  </div>
+  <canvas id="worldEffects" aria-hidden="true"></canvas>
+  <div class="journey-shade"></div>
+</div>
+<div class="journey-caption" aria-hidden="true">
+  <span class="journey-rule"><i id="journeyProgress"></i></span>
+  <span id="journeyStage">01 / Space</span>
+</div>
+<button id="motionToggle" class="motion-toggle" type="button" aria-pressed="false">Pause motion</button>
+<div id="loader" aria-hidden="true">
+  <div class="load-mark">
+    <div id="logoGlow" aria-hidden="true"></div>
+    <img id="flyLogo" src="elev8mi-logo.webp" alt="Allison tarot sigil" width="640" height="620" decoding="async">
+  </div>
+  <div class="load-ui" id="loadUi">
+    <div class="load-kicker">Allison</div>
+    <div class="pct" id="pct">0%</div>
+    <div class="status" id="status">Entering the glade</div>
+    <div class="veil" aria-hidden="true"><div class="veil-track"><div class="veil-fill" id="fill"></div></div></div>
+  </div>
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="nav-trails" aria-hidden="true">
+      <span id="navTrailTop" class="nav-trail nav-trail-top"></span>
+      <span id="navTrailBottom" class="nav-trail nav-trail-bottom"></span>
+    </div>
+    <a class="brand" href="#top" id="brandSlot" aria-label="ELEV8MI home">
+      <img class="nav-wordmark-image" src="elev8mi-wordmark.webp" alt="ELEV8MI" width="640" height="142" decoding="async">
+    </a>
+    <div class="tuner-slot">
+      <div class="tuner" id="tuner">
+      <span class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span class="hz">528 Hz</span>
+      <button type="button" id="toneBtn" aria-pressed="false" aria-label="Play 528 Hz"><span class="mark"></span></button>
+    </div>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+    <nav id="nav">
+      <a href="#about">The Work</a>
+      <a href="#services">Sessions</a>
+      <a href="#portfolio">Notes</a>
+      <a href="#reading">Draw</a>
+      <a href="#contact">Book</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero reveal">
+    <div class="solar-system" id="solarSystem" aria-label="The ELEV8MI solar system">
+      <canvas id="orbitPaths" aria-hidden="true"></canvas>
+      <div class="hero-sigil"><span class="hero-glow" aria-hidden="true"></span><img id="heroLogo" src="elev8mi-logo.webp" alt="ELEV8MI — the center of our solar system" width="640" height="620" decoding="async" fetchpriority="high"></div>
+      <div id="solarBodies" class="solar-bodies"></div>
+      <div class="planet-detail" id="planetDetail" aria-live="polite"></div>
+      <div class="moon-now"><canvas id="liveMoon" width="168" height="168" aria-hidden="true"></canvas><div><span class="moon-kicker">The Moon tonight</span><strong id="moonPhaseName">Calculating phase…</strong><span id="moonPhaseInfo"></span></div></div>
+    </div>
+    <div class="hero-copy">
+      <h1>Cards for the <span class="one-line">in-between</span></h1>
+      <p class="tag">When the old life has loosened and the new one is not yet dry.</p>
+      <p class="lede">Allison reads tarot as a map of change — what you are leaving, what is still in the dark, and what is ready for air. Sessions in person or at a distance. The room is held at 528 Hz.</p>
+      <div class="cta-row">
+        <a class="btn solid" href="#reading">Draw a card</a>
+        <a class="btn" href="#contact">Book a reading</a>
+      </div>
+    </div>
+    <p class="scroll-invitation">From the stars to the roots<span aria-hidden="true">↓</span></p>
+  </section>
+
+  <section id="about" class="reveal">
+    <h2 class="section-title">The work</h2>
+    <p class="section-sub">How Allison reads</p>
+    <div class="about-text">
+      <p>A reading here is not a fortune taped to the wall. It is a look at the stage you are actually in — appetite, stillness, or first flight — and a clean name for what comes next.</p>
+      <p>Sit with Allison in the room, or call in from wherever you are. Live sessions on TikTok keep a shared night going so the work does not happen only behind a closed door.</p>
+      <p>Come when the old story is finished talking. Bring the question you have been walking around.</p>
+    </div>
+  </section>
+
+  <section id="services" class="reveal">
+    <h2 class="section-title">Ways to sit</h2>
+    <p class="section-sub">In the room and across the wire</p>
+    <div class="grid stages">
+      <article class="card">
+        <div class="sigil">●</div>
+        <h3>In person</h3>
+        <p>A private table. The question spoken out loud. Time enough for the cards to finish their sentence.</p>
+      </article>
+      <article class="card">
+        <div class="sigil">◐</div>
+        <h3>Distance</h3>
+        <p>The same depth, no travel. Camera or voice. Notes sent after so the reading does not evaporate.</p>
+      </article>
+      <article class="card">
+        <div class="sigil">◉</div>
+        <h3>Night lives</h3>
+        <p>Open draws on TikTok. Pull a card with the room. Ask in the comments. Leave when you have what you came for.</p>
+      </article>
+      <article class="card">
+        <div class="sigil">🦋</div>
+        <h3>Keepsakes</h3>
+        <p>Small objects for the desk and the altar — reminders of a reading you are still living through.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="portfolio" class="reveal">
+    <h2 class="section-title">From the table</h2>
+    <p class="section-sub">What people take with them</p>
+    <div class="quote">
+      <p>“She named the version of me I was still performing. I walked out knowing which part could stay and which part was already gone.”</p>
+      <cite>— S.M.</cite>
+    </div>
+    <div class="split">
+      <article class="card">
+        <h3>Altar pieces</h3>
+        <p>Quiet objects to keep near while a reading is still working on you.</p>
+      </article>
+      <article class="card">
+        <h3>Session notes</h3>
+        <p>What was asked. What came up. What to watch for in the next few weeks — written down, not guessed later.</p>
+      </article>
+    </div>
+    <div class="card" style="margin-top:1rem">
+      <div class="stars">★★★★★</div>
+      <h3>Five stars</h3>
+      <p>From clients who came in with a knot and left with a sentence they could use.</p>
+    </div>
+  </section>
+
+  <section id="reading" class="reveal">
+    <h2 class="section-title">Your card reading</h2>
+    <p class="section-sub">A moment to pause, ask, and reflect.</p>
+    <ol class="reading-steps"><li><b>1. Set an intention</b><span>Write a question below, or simply keep one in mind.</span></li><li><b>2. Choose your spread</b><span>One card for a focus. Three for past, present, and what may unfold.</span></li><li><b>3. Draw &amp; reflect</b><span>Shuffle the deck, choose your face-down cards, then read their meanings.</span></li></ol>
+    <button type="button" id="readingHelp" class="reading-help">How does this work?</button>
+    <div class="tarot-panel">
+      <label for="question" class="question-label">Your question <span>(optional)</span></label>
+      <input id="question" class="ask" maxlength="140" placeholder="What do you want the cards to speak to?" aria-label="Question for the cards">
+      <div class="spread-row" id="spreadRow">
+        <button type="button" class="on" aria-pressed="true" data-spread="one">One card</button>
+        <button type="button" aria-pressed="false" data-spread="three">Three cards</button>
+      </div>
+      <div class="draw-row"><button type="button" id="drawBtn">Shuffle &amp; choose</button></div>
+      <p class="deck-note" id="pickHint" role="status" aria-live="polite">Press Shuffle &amp; choose to spread the deck. Then select a card that draws your attention.</p>
+      <div id="deckChoices" class="deck-choices" aria-label="Choose cards from the shuffled deck"></div>
+      <div class="spread" id="spread"></div>
+      <div class="meanings" id="meanings"></div>
+      <p class="synthesis" id="synthesis"></p>
+      <div class="copy-row"><button type="button" id="interpretReading" hidden>Ask Allison to interpret</button><button type="button" id="copyReading" hidden>Copy this reading</button></div>
+    </div>
+  </section>
+
+  <section id="contact" class="reveal">
+    <h2 class="section-title">Find Allison</h2>
+    <p class="section-sub">Book the hour</p>
+    <div class="contact-grid">
+      <div class="contact"><h3>Email</h3><p>readings@allison.grok.me</p></div>
+      <div class="contact"><h3>Phone</h3><p>Shared when you book</p></div>
+      <div class="contact"><h3>Where</h3><p>In person by appointment · distance by video or voice</p></div>
+    </div>
+    <div class="socials">
+      <a href="https://www.tiktok.com" target="_blank" rel="noopener">TikTok</a>
+      <a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.facebook.com" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <p class="section-sub" style="margin-top:1.4rem;margin-bottom:0">Nightly draws on TikTok</p>
+  </section>
+</main>
+<dialog id="readingGuide" aria-labelledby="readingGuideTitle"><button type="button" id="closeReadingGuide" aria-label="Close instructions">×</button><h2 id="readingGuideTitle">A little guidance before you draw</h2><p>Try an open question, such as “What deserves my attention today?” You can leave the question blank, too.</p><p><b>One card</b> gives you a single theme. <b>Three cards</b> offer three perspectives: past, present, and what may unfold.</p><p>Press Shuffle &amp; choose. Choose one or three face-down cards from the shuffled deck. Each selected card appears in your reading. Its meaning appears underneath once your spread is complete.</p><p>A reversed card is another angle on the theme, not a bad omen. Use the reading as a prompt for reflection, rather than a guaranteed prediction.</p><button type="button" id="beginReading">I’m ready to draw</button></dialog>
+
+<dialog id="interpretDialog" aria-labelledby="interpretTitle" aria-describedby="interpretDescription">
+ <button type="button" id="closeInterpret" aria-label="Close interpretation request">×</button>
+ <h2 id="interpretTitle">Let Allison interpret your cards</h2>
+ <p id="interpretDescription">Your spread is ready. Open an email draft to Allison with your selected cards already included.</p>
+ <ul id="interpretCards"></ul>
+ <label for="interpretMessage">Your message</label>
+ <textarea id="interpretMessage" rows="9" readonly></textarea>
+ <a id="interpretEmail" class="interpret-email">Email Allison</a>
+ <p class="interpret-note">Opens your email app. Review the draft and send it when you’re ready.</p>
+ <button type="button" id="continueReading">Return to my reading</button>
+</dialog>
+<footer>
+  <div>© 2026 Allison · Tarot Readings · All rights reserved</div>
+  <div>A card, a frequency, a next step · 528 Hz</div>
+  <button type="button" id="replay">Replay entrance</button>
+</footer>
+
+<script>
+// The page remains usable even if a decorative entrance script fails.
+window.elev8miLoaderWatchdog=setTimeout(()=>{
+ document.body.classList.remove('locked');document.body.classList.add('live');
+ document.getElementById('loader')?.classList.add('done');
+ document.querySelector('header')?.classList.add('ready');
+ const hero=document.getElementById('heroLogo');if(hero)hero.style.opacity='1';
+ const fly=document.getElementById('flyLogo');if(fly)fly.style.visibility='hidden';
+},3500);
+</script>
+<script src="entrance.js" defer></script>
+<script src="audio.js" defer></script>
+<script src="journey.js" defer></script>
+<script src="motion.js" defer></script>
+<script src="vendor/astronomy.browser.min.js" defer></script>
+<script src="lunar-phase.js" defer></script>
+<script src="solar-system.js" defer></script>
+<script src="planet-spin.js" defer></script>
+<script src="tarot-deck.js" defer></script>
+<script src="tarot.js" defer></script>
+<script src="reading-contact.js" defer></script>
+<script src="reading-help.js" defer></script>
+<script src="navigation.js" defer></script>
+<script src="photo-motion.js" defer></script>
+<script src="world-effects.js" defer></script>
+</body>
+</html>

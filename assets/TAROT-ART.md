@@ -1,0 +1,7 @@
+# Tarot artwork
+
+The deck atlas was created with the built-in image-generation tool, using the user-supplied 78-card Rider-Waite-Smith-style reference as a style-transfer input. Each card retains its atlas index; HTML supplies the authoritative card name and reading orientation. Generated lettering and fine illustration details are artistic approximations.
+
+## Final prompt
+
+Use case: style-transfer. Edit the attached reference of a complete 78-card tarot deck into a cohesive ELEV8MI celestial deck asset for a website. Preserve the EXACT 13 columns by 6 rows grid, every card in its original position, classic Rider-Waite-Smith figures, compositions, suit symbols, numbers and titles. Transform cream, yellow, green and red colors into a luxurious black/deep midnight-violet, amethyst, pale blue and restrained pale-gold palette. Engraved fine lines, legible detailed figures, celestial accents subtly within the illustrations, flat straight-on cards. Preserve recognizable tarot symbolism, no emoji, no generic abstract replacements. Eliminate the outer white margin and use uniform straight grid boundaries; every card cell full bleed with its own thin ornamental border. Do not reorder, merge or omit any cards; no extra cards; no perspective or product mockup. Render a high-resolution landscape atlas with 13 equal columns and 6 equal rows. This is a style-transfer of the one supplied atlas, not a redesign of card identities.
