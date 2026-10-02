@@ -1,0 +1,38 @@
+/* Each halo is driven by the shared motion clock, including its paused state. */
+.solar-body[data-planet] .spinning-planet,
+.solar-body[data-planet] .planet-model > img {
+  filter:drop-shadow(0 0 var(--planet-halo-inner,2px) rgba(var(--planet-glow-rgb,185,212,255),var(--planet-halo-alpha,.34)))
+         drop-shadow(0 0 var(--planet-halo-outer,10px) rgba(var(--planet-glow-rgb,185,212,255),var(--planet-halo-alpha,.5)))
+         drop-shadow(0 0 var(--planet-halo-bloom,17px) rgba(var(--planet-glow-rgb,185,212,255),calc(var(--planet-halo-alpha,.5) * .42)));
+}
+.solar-body[data-planet="Saturn"] .planet-model > img {
+  filter:brightness(var(--ring-light,.75)) saturate(var(--ring-warmth,1))
+         drop-shadow(0 0 var(--planet-halo-inner,2px) rgba(var(--planet-glow-rgb,241,213,157),var(--planet-halo-alpha,.34)))
+         drop-shadow(0 0 var(--planet-halo-outer,10px) rgba(var(--planet-glow-rgb,241,213,157),var(--planet-halo-alpha,.5)))
+         drop-shadow(0 0 var(--planet-halo-bloom,17px) rgba(var(--planet-glow-rgb,241,213,157),calc(var(--planet-halo-alpha,.5) * .42)));
+}
+
+/* Perspective scales the artwork while touch targets stay 44px. */
+.planet-model {
+  position:absolute;inset:0;display:grid;place-items:center;
+  pointer-events:none;
+  transform:scale(var(--planet-perspective,1));
+  transform-origin:center;
+}
+#orbitPaths,.solar-system .solar-bodies {
+  height:var(--orbit-stage-height,100%);
+  bottom:auto;
+}
+.solar-system .solar-bodies {overflow:clip}
+.earth-location::after {
+  content:"";position:absolute;top:4px;left:9px;width:26px;height:26px;
+  border-radius:50%;pointer-events:none;z-index:-1;
+  background:radial-gradient(circle,rgba(132,204,255,var(--earth-marker-halo,.4)),rgba(132,204,255,0) 70%);
+}
+#liveMoon,.orbit-moon-disc,canvas.planet-portrait {
+  filter:brightness(1.38) contrast(1.04)
+    drop-shadow(0 0 4px rgba(247,251,255,.98))
+    drop-shadow(0 0 16px rgba(185,221,255,var(--moon-halo-alpha,.72)))
+    drop-shadow(0 0 34px rgba(169,187,255,calc(var(--moon-halo-alpha,.72) * .78)))
+    drop-shadow(0 0 54px rgba(159,142,245,calc(var(--moon-halo-alpha,.72) * .48)));
+}
