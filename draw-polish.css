@@ -1,0 +1,41 @@
+/* The visible deck explains the flow before the visitor chooses a reading. */
+select.reading-style {
+  font-family:"Cinzel",Georgia,serif;font-size:16px;font-weight:600;
+  line-height:1.5;letter-spacing:.045em;text-transform:uppercase;
+  text-overflow:ellipsis;min-width:0;
+}
+select.reading-style option{font:inherit;text-transform:uppercase}
+.deck-choice {transition:transform .25s,opacity .35s,filter .4s,box-shadow .35s,border-color .35s}
+.deck-choices[data-state="waiting"] .deck-choice {
+  opacity:.43;filter:grayscale(1);border-color:rgba(217,211,232,.35);
+  box-shadow:0 5px 12px rgba(0,0,0,.2);cursor:default;
+}
+.deck-choices[data-state="ready"] .deck-choice {
+  animation:deckAwaken .6s ease-out both;
+  animation-delay:calc(var(--card-index,0)*35ms);
+}
+.deck-choices[data-state="ready"] .deck-choice,
+.deck-choices[data-state="drawing"] .deck-choice:not(:disabled) {
+  border-color:#c6b5ed;box-shadow:0 6px 18px rgba(0,0,0,.35),0 0 14px rgba(166,136,239,.3);
+}
+.deck-choices[data-state="complete"] .deck-choice:not(.is-chosen){opacity:.5;filter:grayscale(.65)}
+.draw-row button:disabled{opacity:.48;cursor:default}
+@keyframes deckAwaken {
+  from{opacity:.43;filter:grayscale(1);transform:translateY(4px)}
+  to{opacity:1;filter:grayscale(0);transform:translateY(0)}
+}
+@media(prefers-reduced-motion:reduce){.deck-choices .deck-choice{animation:none;transition:none}}
+/* v28 swappable deck: assets/deck/back.webp replaces the patterned back. */
+.deck-choices.has-deck-back .deck-back{background:var(--deck-back-image) center/cover no-repeat;border-color:transparent}
+.deck-choices.has-deck-back .deck-back>span{display:none}
+.tarot-art.is-deck-file::after{display:none}
+/* v28 interpretation actions: email first, optional card image download. */
+.interpret-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.interpret-actions [hidden]{display:none}
+.interpret-download{display:inline-block;padding:11px 18px;border:1px solid #d7b9f7;border-radius:999px;color:#ead3ff;text-decoration:none;font-weight:600}
+.interpret-download:hover,.interpret-download:focus-visible{background:#d7b9f71f}
+footer .footer-links a{color:inherit;text-decoration:underline;text-decoration-color:#d7b9f766;text-underline-offset:3px}
+.contact-grid .contact a{overflow-wrap:anywhere}
+/* Custom deck art is 600x1050 (4:7). Cards showing a deck file take that ratio. */
+.illustrated-card:has(.is-deck-file){height:auto;aspect-ratio:4/7}
+.tarot-art.is-loading{background-image:none}
